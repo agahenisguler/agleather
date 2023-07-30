@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Repositories\UWork\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

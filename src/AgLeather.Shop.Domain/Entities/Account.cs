@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgLeather.Shop.Domain.Common;
 
 namespace AgLeather.Shop.Domain.Entities
 {
-    internal class Account
+    public class Account : BaseEntity
     {
+        public int CostemerId { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime LastLoginDate { get; set; }
+        public string LastUserIp { get; set; }
+       
+        //Ziyaretçi ile müşteriler arasındakı farkı göstermek için kullanıldı.
+        public Customer Customer { get; set; }
     }
 }
