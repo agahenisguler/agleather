@@ -1,4 +1,5 @@
 ﻿using AgLeather.Shop.Domain.Common;
+using System.Collections;
 
 namespace AgLeather.Shop.Domain.Entities
 {
@@ -9,6 +10,11 @@ namespace AgLeather.Shop.Domain.Entities
         public string Detail { get; set; }
         public int UnitInStock { get; set; }
         public int UnıtPrice { get; set; }
-        
+        public string ThumbnailImage { get; set; }
+
+        //Navigation property uygulandı.
+        public Category Category { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
+
     }
 }
