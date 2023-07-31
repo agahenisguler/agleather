@@ -1,4 +1,5 @@
 ﻿using AgLeather.Shop.Domain.Common;
+using System.Collections;
 
 namespace AgLeather.Shop.Domain.Entities
 {
@@ -20,6 +21,7 @@ namespace AgLeather.Shop.Domain.Entities
         
         //Bir kullanıcının birden fazla siparişi olabilir.
         public ICollection<Order> Orders { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
     }
     

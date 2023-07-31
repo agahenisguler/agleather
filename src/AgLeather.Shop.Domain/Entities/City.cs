@@ -6,6 +6,5 @@ namespace AgLeather.Shop.Domain.Entities
     {
         public string Name { get; set; }
         
-        public ICollection<Address> Addresses { get; set; }
     }
 }

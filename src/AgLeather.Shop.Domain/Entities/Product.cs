@@ -18,6 +18,7 @@ namespace AgLeather.Shop.Domain.Entities
 
         //Bir ürün birden fazla satışta kullanılabilir.
         public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
     }
 }
