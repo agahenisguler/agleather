@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AgLeather.Shop.Persistance.Mappings.AuditableEntityMapping&lt;T&gt;">
+    <Position X="3.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappings\AuditableEntityMapping.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AgLeather.Shop.Persistance.Mappings.AccountMapping">
+    <Position X="8.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappings\AccountMapping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AgLeather.Shop.Persistance.Mappings.BaseEntityMapping&lt;T&gt;">
+    <Position X="6" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappings\BaseEntityMapping.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AgLeather.Shop.Persistance.Mappings.CategoryMapping">
+    <Position X="1" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="AgLeather.Shop.Persistance.Mappings.AuditableEntityMapping&lt;T&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="4.25" Y="3.296" />
+        <Point X="4.25" Y="3.546" />
+        <Point X="1.625" Y="3.546" />
+        <Point X="1.625" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mappings\CategoryMapping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
