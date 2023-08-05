@@ -43,6 +43,9 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasConstraintName("PRODUCT_CATEGORY_CATEGORY_ID");
 
 
+            builder.ToTable("PRODUCTS");
+
+
 
 
 

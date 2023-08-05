@@ -27,6 +27,8 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasForeignKey(x => x.CityId)
                 .HasConstraintName("ADDRESS_CITY_CITY_ID");
 
+            builder.ToTable("ADDRESSES");
+
 
         }
     }

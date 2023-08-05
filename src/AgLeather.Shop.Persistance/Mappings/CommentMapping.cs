@@ -44,9 +44,11 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasForeignKey(x => x.CustomerId)
                 .HasConstraintName("COMMENT_CUSTOMER_CUSTOMER_ID");
 
+            builder.ToTable("COMMENTS");
 
 
-            
+
+
         }
     }
 }

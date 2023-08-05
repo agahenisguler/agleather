@@ -14,7 +14,9 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .IsRequired()
                 .HasColumnOrder(2);
 
-             
+            builder.ToTable("CITIES");
+
+
 
         }
     }

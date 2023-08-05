@@ -14,6 +14,8 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasColumnType("nvarchar(100)")
                 .HasColumnName("NAME")
                 .HasColumnOrder(2);
+
+            builder.ToTable("CATEGORIES");
         }
     }
 }

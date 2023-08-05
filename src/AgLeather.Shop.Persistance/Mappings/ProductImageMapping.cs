@@ -36,9 +36,12 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasConstraintName("PRODUCT_IMAGE_PRODUCT_PRODUCT_ID");
 
 
+            builder.ToTable("PRODUCT_IMAGES");
 
 
-                
+
+
+
 
 
 

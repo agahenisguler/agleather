@@ -61,8 +61,11 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .WithMany(x => x.Customers)
                 .HasForeignKey(x => x.CityId)
                 .HasConstraintName("CUSTOMER_CIT_CITY_ID");
-                
-                
+
+
+            builder.ToTable("CUSTOMERS");
+
+
 
 
         }

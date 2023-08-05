@@ -45,6 +45,9 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasConstraintName("ORDER_DETAIL_PRODUCT_PRODUCT_ID");
 
 
+            builder.ToTable("ORDER_DETAILS");
+
+
 
 
         }
