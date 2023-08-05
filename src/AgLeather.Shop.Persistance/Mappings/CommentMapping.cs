@@ -4,40 +4,49 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AgLeather.Shop.Persistance.Mappings
 {
-    public class CommentMapping : IEntityTypeConfiguration<Comment>
+    public class CommentMapping : AuditableEntityMapping<Comment>
     {
-        public void Configure(EntityTypeBuilder<Comment> builder)
+        public override void ConfigureDrivedEntityMapping(EntityTypeBuilder<Comment> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id)
-                .HasColumnName("ID")
-                .HasColumnOrder(1);
-
-            builder.Property(x => x.Name)
-                .IsRequired()
-                .HasColumnType("nvarchar(100)")
-                .HasColumnName("NAME")
+            builder.Property(x => x.ProductId)
+                .HasColumnName("PRODUCT_ID")
                 .HasColumnOrder(2);
 
-            builder.Property(x => x.CreateDate)
-                .HasColumnName("CREATE_DATE")
-                .HasColumnOrder(3);
+            builder.Property(x => x.CustomerId)
+                .HasColumnName("CUSTOMER_ID")
+                .HasColumnOrder (3);
 
-            builder.Property(x => x.CreateBy)
-                .HasColumnName("CREATE_BY")
+            builder.Property(x => x.Detail)
+                .HasColumnName("DETAIL")
+                .HasColumnType("nvarchar(max)")
                 .HasColumnOrder(4);
 
-            builder.Property(x => x.ModifiedDate)
-                .HasColumnName("MODIFIED_DATED")
+            builder.Property(x => x.LikeCount)
+                .HasColumnName("LIKE_COUNT")
                 .HasColumnOrder(5);
 
-            builder.Property(x => x.ModifiedBy)
-                .HasColumnName("MODIFIED_BY")
+            builder.Property(x => x.DislikeCount)
+                .HasColumnName("DISLIKE_COUNT")
                 .HasColumnOrder(6);
 
-            builder.Property(x => x.IsDeleted)
-                .HasColumnName("IS_DALETED")
-                .HasDefaultValueSql("0");
+            builder.Property(x => x.IsApproved)
+                .HasColumnName("IS_APPROVED")
+                .HasDefaultValueSql("0")
+                .HasColumnOrder(7);
+
+            builder.HasOne(x => x.Product)
+                .WithMany(x => x.Comments)
+                .HasForeignKey(x => x.Product.Id)
+                .HasConstraintName("COMMENT_PRODUCT_PRODUCT_ID");
+
+            builder.HasOne(x => x.Customer)
+                .WithMany(x => x.Comments)
+                .HasForeignKey(x => x.CustomerId)
+                .HasConstraintName("COMMENT_CUSTOMER_CUSTOMER_ID");
+
+
+
+            
         }
     }
 }

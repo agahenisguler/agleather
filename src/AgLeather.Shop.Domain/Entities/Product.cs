@@ -10,7 +10,6 @@ namespace AgLeather.Shop.Domain.Entities
         public string Detail { get; set; }
         public int UnitInStock { get; set; }
         public int UnıtPrice { get; set; }
-        public string ThumbnailImage { get; set; }
 
         //Navigation property uygulandı.
         public Category Category { get; set; }

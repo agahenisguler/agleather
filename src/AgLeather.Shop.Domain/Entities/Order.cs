@@ -7,8 +7,8 @@ namespace AgLeather.Shop.Domain.Entities
     public class Order : AuditableEntity
 
     {
-        public int CostemerId { get; set; }
-        public String OrderAddress { get; set; }
+        public int CustomerId { get; set; }
+        public int AddressId { get; set; }
         public DateTime OrderDate { get; set; }
         public OrderStatus Status { get; set; }
         public DeliveryType DeliveryType { get; set; }
@@ -16,6 +16,7 @@ namespace AgLeather.Shop.Domain.Entities
 
         //Bir şipariş bir üye tarafından verilir.
         public Customer Customer { get; set; }
+        public Address Address { get; set; }
 
         //Bir müşterinin birden fazla siperişi olabilir.
         public ICollection<OrderDetail> OrderDetails { get; set; }
