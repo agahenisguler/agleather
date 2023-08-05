@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="Repositories\UWork\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
