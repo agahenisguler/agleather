@@ -2,12 +2,6 @@
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Persistance.Mappings;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Persistance.Context
 {
@@ -42,6 +36,9 @@ namespace AgLeather.Shop.Persistance.Context
         }
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
+            //Herhangi bir kayıt işleminde yapılan işlem ekleme ise CrateDate ve CreateBy bilgileri otomatik olarak set edilir.
+            //Herhangi bir kayıt işleminde yapılan işlem güncelleme ise ModifiedDate ve ModifiedBy bilgileri otomatik olarak set edilir.
+
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())
                 switch (entry.State)
                 {
