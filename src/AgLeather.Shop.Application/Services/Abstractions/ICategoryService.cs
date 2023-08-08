@@ -10,16 +10,16 @@ namespace AgLeather.Shop.Application.Services.Abstractions
 
         #region Select
 
-        List<CategoryDto> GetAllCategory();
-        CategoryDto GetCategoryById(int id);
+        Task<List<CategoryDto>> GetAllCategory();
+        Task<CategoryDto> GetCategoryById(int id);
 
         #endregion
 
         #region Insert, Update, Delete
 
-        int CreateCategory(CreateCategoryVM createCategoryVM); 
-        int UpdateCategory(UpdateCategoryVM updateCategoryVM);  
-        int DeleteCategory(int id);
+        Task<int> CreateCategory(CreateCategoryVM createCategoryVM); 
+        Task<int> UpdateCategory(UpdateCategoryVM updateCategoryVM);  
+        Task<int> DeleteCategory(int id);
 
         #endregion
 

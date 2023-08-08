@@ -17,4 +17,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AgLeather.Shop.Application\AgLeather.Shop.Application.csproj" />
+    <ProjectReference Include="..\AgLeather.Shop.Persistance\AgLeather.Shop.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>

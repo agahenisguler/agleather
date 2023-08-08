@@ -1,3 +1,6 @@
+using AgLeather.Shop.Application.Services.Abstractions;
+using AgLeather.Shop.Application.Services.Implementation;
+using AgLeather.Shop.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,13 +13,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AgLeatherContext>(opt =>
 {
-
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AgLeatherConnection"));
-
 });
-
-
-
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

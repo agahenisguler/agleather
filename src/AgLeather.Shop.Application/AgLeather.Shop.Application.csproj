@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AgLeather.Shop.Persistance\AgLeather.Shop.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
