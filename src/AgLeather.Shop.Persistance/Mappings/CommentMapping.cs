@@ -36,7 +36,7 @@ namespace AgLeather.Shop.Persistance.Mappings
 
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.Comments)
-                .HasForeignKey(x => x.Product.Id)
+                .HasForeignKey(x => x.ProductId)
                 .HasConstraintName("COMMENT_PRODUCT_PRODUCT_ID");
 
             builder.HasOne(x => x.Customer)

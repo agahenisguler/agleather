@@ -9,7 +9,7 @@ namespace AgLeather.APİ.Controllers
     //category//getAll
 
     [ApiController]
-    [Route("[category]")]
+    [Route("category")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

@@ -26,31 +26,31 @@ namespace AgLeather.Shop.Persistance.Mappings
                .HasColumnName("SURNAME")
                .HasColumnType("nvarchar(30)")
                .IsRequired()   //Boş bırakılamaz.
-               .HasColumnOrder(3);
+               .HasColumnOrder(5);
 
             builder.Property(x => x.Email)
                .HasColumnName("EMAIL")
                .HasColumnType("nvarchar(200)")
                .IsRequired()
-               .HasColumnOrder(3);
+               .HasColumnOrder(6);
 
             builder.Property(x => x.PhoneNumber)
                .HasColumnName("PHONE_NUMBER")
-               .HasColumnOrder(3);
+               .HasColumnOrder(7);
 
             builder.Property(x => x.Age)
                .HasColumnName("AGE")
-               .HasColumnOrder(3);
+               .HasColumnOrder(8);
 
             builder.Property(x => x.Birthdate)
                .HasColumnName("BIRTHDATE")
                .IsRequired()
-               .HasColumnOrder(3);
+               .HasColumnOrder(9);
 
             builder.Property(x => x.Gender)
               .HasColumnName("GENDER")
               .IsRequired()
-              .HasColumnOrder(3);
+              .HasColumnOrder(10);
 
             builder.HasOne(x => x.Account)
                 .WithOne(x => x.Customer)

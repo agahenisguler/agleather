@@ -11,29 +11,29 @@ namespace AgLeather.Shop.Persistance.Mappings
         {
             builder.Property(x => x.CustomerId)
                 .HasColumnName("CUSTOMER_ID")
-                .HasColumnOrder(1);
+                .HasColumnOrder(2);
 
             builder.Property(x => x.AddressId)
                 .HasColumnName("ADDRESS_ID")
-                .HasColumnOrder(2);
+                .HasColumnOrder(3);
 
             builder.Property(x=>x.OrderDate)
                 .HasColumnName("ORDER_DATE")
                 .HasDefaultValueSql("getdate()")    //Bu alan boş bırakılabilir.
-                .HasColumnOrder(3);
+                .HasColumnOrder(4);
 
             builder.Property(x => x.Status)
                 .HasColumnName("ORDER_STATUS")
-                .HasColumnOrder(4);
+                .HasColumnOrder(5);
 
             builder.Property(x => x.DeliveryType)
                 .HasColumnName("DELIVERY_TYPE")
                 .IsRequired()
-                .HasColumnOrder(5);
+                .HasColumnOrder(6);
 
             builder.Property(x => x.GiftPackt)
                 .HasColumnName("GIFT_PACKT")
-                .HasColumnOrder(6);
+                .HasColumnOrder(7);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders)

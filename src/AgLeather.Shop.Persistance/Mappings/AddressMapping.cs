@@ -16,11 +16,11 @@ namespace AgLeather.Shop.Persistance.Mappings
         {
             builder.Property(x => x.CityId)
                 .HasColumnName("CITY_ID")
-                .HasColumnOrder(1);
+                .HasColumnOrder(2);
 
             builder.Property(x=>x.Text)
                 .HasColumnName("TEXT")
-                .HasColumnOrder (2);
+                .HasColumnOrder (3);
 
             builder.HasOne(x => x.City)
                 .WithMany(x => x.Addresses)

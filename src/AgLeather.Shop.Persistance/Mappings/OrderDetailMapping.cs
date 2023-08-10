@@ -32,7 +32,7 @@ namespace AgLeather.Shop.Persistance.Mappings
 
             builder.Property(x => x.OrderId)
                 .HasColumnName("ORDER_ID")
-                .HasColumnOrder(2);
+                .HasColumnOrder(6);
 
             builder.HasOne(x => x.Order)
                 .WithMany(x => x.OrderDetails)
