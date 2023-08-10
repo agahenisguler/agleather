@@ -13,12 +13,6 @@ namespace AgLeather.Shop.Domain.Entities
 
         public Product Product { get; set; }
         public Customer Customer { get; set; }
-        public object Name { get; set; }
-        public object? Id { get; set; }
-        public object CreateDate { get; set; }
-        public object CreateBy { get; set; }
-        public object ModifiedDate { get; set; }
-        public object ModifiedBy { get; set; }
-        public object IsDeleted { get; set; }
+      
     }
 }

@@ -14,12 +14,13 @@ namespace AgLeather.Shop.Persistance.Mappings
         public override void ConfigureDrivedEntityMapping(EntityTypeBuilder<ProductImage> builder)
         {
             builder.Property(x => x.ProductId)
+                .IsRequired()
                 .HasColumnName("PRODUCT_ID")
                 .HasColumnOrder(2);
 
             builder.Property(x => x.Path)
                 .HasColumnName("PATH")
-                .HasColumnType("nvarchar(150")
+                .HasColumnType("nvarchar(150)")
                 .HasColumnOrder(3);
 
             builder.Property(x => x.Order)

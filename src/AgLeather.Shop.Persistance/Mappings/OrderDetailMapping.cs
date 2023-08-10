@@ -37,7 +37,8 @@ namespace AgLeather.Shop.Persistance.Mappings
             builder.HasOne(x => x.Order)
                 .WithMany(x => x.OrderDetails)
                 .HasForeignKey(x => x.OrderId)
-                .HasConstraintName("ORDER_DETAIL_ORDER_ORDER_ID");
+                .HasConstraintName("ORDER_DETAIL_ORDER_ORDER_ID")
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.OrderDetails)
