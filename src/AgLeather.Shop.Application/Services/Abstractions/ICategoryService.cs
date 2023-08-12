@@ -1,5 +1,6 @@
 ﻿using AgLeather.Shop.Application.Models.Dtos;
 using AgLeather.Shop.Application.Models.RequestModels;
+using AgLeather.Shop.Application.Wrapper;
 
 namespace AgLeather.Shop.Application.Services.Abstractions
 {
@@ -10,16 +11,16 @@ namespace AgLeather.Shop.Application.Services.Abstractions
 
         #region Select
 
-        Task<List<CategoryDto>> GetAllCategories();
-        Task<CategoryDto> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
+        Task<Result<List<CategoryDto>>> GetAllCategories();
+        Task<Result<CategoryDto>> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
 
         #endregion
 
         #region Insert, Update, Delete
 
-        Task<int> CreateCategory(CreateCategoryVM createCategoryVM); 
-        Task<int> UpdateCategory(UpdateCategoryVM updateCategoryVM);  
-        Task<int> DeleteCategory(DeleteCategoryVM deleteCategoryVM);
+        Task<Result<int>> CreateCategory(CreateCategoryVM createCategoryVM); 
+        Task<Result<int>> UpdateCategory(UpdateCategoryVM updateCategoryVM);  
+        Task<Result<int>> DeleteCategory(DeleteCategoryVM deleteCategoryVM);
 
         #endregion
 

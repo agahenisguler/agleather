@@ -1,6 +1,7 @@
 using AgLeather.Shop.Application.Models.Dtos;
 using AgLeather.Shop.Application.Models.RequestModels;
 using AgLeather.Shop.Application.Services.Abstractions;
+using AgLeather.Shop.Application.Wrapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgLeather.APİ.Controllers
@@ -21,14 +22,14 @@ namespace AgLeather.APİ.Controllers
         }
         [HttpGet("get")]
 
-        public async Task<ActionResult<CategoryDto>> GetAllCategories()
+        public async Task<ActionResult<Result<List<CategoryDto>>>> GetAllCategories()
         {
             var categories= await _categoryService.GetAllCategories();
             return Ok(categories);
         }
 
         [HttpGet("get/{id:int}")]
-        public async Task<ActionResult> GetAllCategories(int id)
+        public async Task<ActionResult<Result<CategoryDto>>> CategoryById(int id)
         {
             var categories = await _categoryService.GetCategoryById(new GetCategoryByIdVM { Id = id });
             return Ok(categories);
@@ -36,14 +37,14 @@ namespace AgLeather.APİ.Controllers
 
         }
         [HttpPost("create")]
-        public async Task<ActionResult> CreateCategory(CreateCategoryVM createCategoryVM)
+        public async Task<ActionResult<Result<int>>> CreateCategory(CreateCategoryVM createCategoryVM)
         {
             var categoryId = await _categoryService.CreateCategory(createCategoryVM);
             return Ok(categoryId);
 
         }
         [HttpPut("update/{id:int}")]
-        public async Task<ActionResult> UpdateCategory(int id, UpdateCategoryVM updateCategoryVM)
+        public async Task<ActionResult<Result<int>>> UpdateCategory(int id, UpdateCategoryVM updateCategoryVM)
         {
             if (id != updateCategoryVM.Id)
             {
@@ -54,7 +55,7 @@ namespace AgLeather.APİ.Controllers
 
         }
         [HttpDelete("delete/{id:int}")]
-        public async Task<ActionResult> DeleteCategory(int id)
+        public async Task<ActionResult<Result<int>>> DeleteCategory(int id)
         {
             var categoryId = await _categoryService.DeleteCategory(new DeleteCategoryVM { Id=id });
             return Ok(categoryId);
