@@ -1,4 +1,5 @@
 using AgLeather.Shop.Application.Models.Dtos;
+using AgLeather.Shop.Application.Models.RequestModels;
 using AgLeather.Shop.Application.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,15 +17,47 @@ namespace AgLeather.APİ.Controllers
 
         public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService; 
+            _categoryService = categoryService;
         }
+        [HttpGet("get")]
 
-        [HttpGet("getAll")]
-        public async Task<List<CategoryDto>> GetAllCategories()
+        public async Task<ActionResult<CategoryDto>> GetAllCategories()
         {
-            var category = await _categoryService.GetAllCategory();
-            return category;
+            var categories= await _categoryService.GetAllCategories();
+            return Ok(categories);
+        }
+
+        [HttpGet("get/{id:int}")]
+        public async Task<ActionResult> GetAllCategories(int id)
+        {
+            var categories = await _categoryService.GetCategoryById(new GetCategoryByIdVM { Id = id });
+            return Ok(categories);
+
 
         }
-    }
+        [HttpPost("create")]
+        public async Task<ActionResult> CreateCategory(CreateCategoryVM createCategoryVM)
+        {
+            var categoryId = await _categoryService.CreateCategory(createCategoryVM);
+            return Ok(categoryId);
+
+        }
+        [HttpPut("update/{id:int}")]
+        public async Task<ActionResult> UpdateCategory(int id, UpdateCategoryVM updateCategoryVM)
+        {
+            if (id != updateCategoryVM.Id)
+            {
+                return BadRequest();
+            }
+            var categoryId = await _categoryService.UpdateCategory(updateCategoryVM);
+            return Ok(categoryId);
+
+        }
+        [HttpDelete("delete/{id:int}")]
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            var categoryId = await _categoryService.DeleteCategory(new DeleteCategoryVM { Id=id });
+            return Ok(categoryId);
+        }
+    } 
 }

@@ -12,7 +12,7 @@ namespace AgLeather.Shop.Persistance.Mappings
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasColumnType("nvarchar(100)")
-                .HasColumnName("NAME")
+                .HasColumnName("CATEGORY_NAME")
                 .HasColumnOrder(2);
 
             builder.ToTable("CATEGORIES");

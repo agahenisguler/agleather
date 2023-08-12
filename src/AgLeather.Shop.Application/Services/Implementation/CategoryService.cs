@@ -3,6 +3,8 @@ using AgLeather.Shop.Application.Models.RequestModels;
 using AgLeather.Shop.Application.Services.Abstractions;
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Persistance.Context;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgLeather.Shop.Application.Services.Implementation
@@ -10,45 +12,56 @@ namespace AgLeather.Shop.Application.Services.Implementation
     public class CategoryService : ICategoryService
     {
         private readonly AgLeatherContext _context;
+        private readonly IMapper _mapper;
 
-        public CategoryService(AgLeatherContext context)
+        public CategoryService(AgLeatherContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        //Ctrl+M+O
-
-        public async Task<List<CategoryDto>> GetAllCategory()
+        //Ctrl+M+O   
+        //Automapper : Bir modeli başka bir modele çevirmek için kullanılır.
+        
+        public async Task<List<CategoryDto>> GetAllCategories()
         {
-            var categories = await _context.Categories
-                .Select(x => new CategoryDto
-                {
-                    Id = x.Id,
-                    Name = x.Name
+            //var categories = await _context.Categories.ToListAsync();
+            //_mapper.Map<T1,T2> T1 tipindeki kaynak objeyi T2 tipindeki kaynak objeye çevirir.
+            //var categoryDtos = _mapper.Map<List<Category> ,List<CategoryDto>>(categories);
 
-                }).ToListAsync();
+            var categoryDtos = await _context.Categories
+                .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
 
-            return categories;
+            return categoryDtos;
 
         }
 
-        public async Task<CategoryDto> GetCategoryById(int id)
+        public async Task<CategoryDto> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM)
         {
-            var categoryEntity = await _context.Categories.FindAsync(id);
-            var categoryDto = new CategoryDto
-            {
-                Id = id,
-                Name = categoryEntity.Name
-            };
+            //var categoryEntity = await _context.Categories.FindAsync(id);
+            //var categoryDto = new CategoryDto
+            //{
+            //    Id = id,
+            //    Name = categoryEntity.Name
+            //};
+
+            var categoryDto = await _context.Categories
+                .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(x => x.Id == getCategoryByIdVM.Id);
+
             return categoryDto;
         }
         public async Task<int> CreateCategory(CreateCategoryVM createCategoryVM)
         {
             //Yeni bir kategori entity nesnesi
-            var categoryEntity = new Category
-            {
-                Name = createCategoryVM.CategoryName
-            };
+            //var categoryEntity = new Category
+            //{
+            //    Name = createCategoryVM.CategoryName
+            //};
+
+            var categoryEntity = _mapper.Map<CreateCategoryVM, Category>(createCategoryVM);
+
             //Üretilen entity kategori koleksiyonuna ekleniyor.
             await _context.Categories.AddAsync(categoryEntity);
             await _context.SaveChangesAsync();
@@ -56,17 +69,17 @@ namespace AgLeather.Shop.Application.Services.Implementation
             return categoryEntity.Id;
         }
 
-        public async Task<int> DeleteCategory(int id)
+        public async Task<int> DeleteCategory(DeleteCategoryVM deleteCategoryVM)
         {
             //Gönderilen id bilgisine karşılık gelen bir kategory var mı?
-            var categoryExist = await _context.Categories.AnyAsync(x => x.Id == id);
+            var categoryExist = await _context.Categories.AnyAsync(x => x.Id == deleteCategoryVM.Id);
             if (!categoryExist)
             {
-                throw new Exception($"{id} numarali kategori bulunamadi.");
+                throw new Exception($"{deleteCategoryVM.Id} numarali kategori bulunamadi.");
             }
 
             //Veritabanında kayıtlı kategori getirelim.
-            var existsCategory = await _context.Categories.FindAsync(id);
+            var existsCategory = await _context.Categories.FindAsync(deleteCategoryVM.Id);
             //Silindi olarak işaretleyiniz.
             existsCategory.IsDeleted = true;
             //Gündellemeyi veritabanına yansıtalım
@@ -86,15 +99,17 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
             }
 
+            var updatedCategory = _mapper.Map<UpdateCategoryVM, Category>(updateCategoryVM);
+
             //Veritabanında kayıtlı kategori getirelim.
-            var existsCategory = await _context.Categories.FindAsync(updateCategoryVM.Id);
-            //Silindi olarak işaretleyiniz.
-            existsCategory.Name = updateCategoryVM.CategoryName;
+            //var existsCategory = await _context.Categories.FindAsync(updateCategoryVM.Id);
+            ////Silindi olarak işaretleyiniz.
+            //existsCategory.Name = updateCategoryVM.CategoryName;
             //Gündellemeyi veritabanına yansıtalım
-            _context.Categories.Update(existsCategory);
+            _context.Categories.Update(updatedCategory);
             await _context.SaveChangesAsync();
 
-            return updateCategoryVM.Id;
+            return updatedCategory.Id;
         }
 
     }

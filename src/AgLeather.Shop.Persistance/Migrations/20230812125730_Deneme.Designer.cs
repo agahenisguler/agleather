@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     [DbContext(typeof(AgLeatherContext))]
-    [Migration("20230810191130_agah4")]
-    partial class agah4
+    [Migration("20230812125730_Deneme")]
+    partial class Deneme
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,8 +121,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -134,25 +133,24 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("NAME")
+                        .HasColumnName("CATEGORY_NAME")
                         .HasColumnOrder(2);
 
                     b.HasKey("Id");
@@ -199,8 +197,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -235,7 +232,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
@@ -245,14 +242,13 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<int>("ProductId")
@@ -300,8 +296,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(3);
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -324,19 +319,18 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<string>("Name")
@@ -382,8 +376,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(3);
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -410,19 +403,18 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<DateTime>("OrderDate")
@@ -457,8 +449,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -470,19 +461,18 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<int>("OrderId")
@@ -530,8 +520,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(2);
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -549,19 +538,18 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<string>("Name")
@@ -598,8 +586,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("CREATE_BY")
                         .HasColumnOrder(27);
 
@@ -611,7 +598,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("IS_DALETED")
+                        .HasColumnName("IS_DELETED")
                         .HasColumnOrder(30)
                         .HasDefaultValueSql("0");
 
@@ -621,14 +608,13 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<string>("ModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("nvarchar(10)")
                         .HasColumnName("MODIFIED_BY")
                         .HasColumnOrder(29);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2")
-                        .HasColumnName("MODIFIED_DATED")
+                        .HasColumnName("MODIFIED_DATE")
                         .HasColumnOrder(28);
 
                     b.Property<int>("Order")

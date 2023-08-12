@@ -22,18 +22,22 @@ namespace AgLeather.Shop.Persistance.Mappings
 
             builder.Property(x => x.CreateBy)
                 .HasColumnName("CREATE_BY")
+                .HasColumnType("nvarchar(10)")
+                .IsRequired(false)
                 .HasColumnOrder(27);
 
             builder.Property(x => x.ModifiedDate)
-                .HasColumnName("MODIFIED_DATED")
+                .HasColumnName("MODIFIED_DATE")
                 .HasColumnOrder(28);
 
             builder.Property(x => x.ModifiedBy)
                 .HasColumnName("MODIFIED_BY")
+                .HasColumnType("nvarchar(10)")
+                .IsRequired(false)
                 .HasColumnOrder(29);
 
             builder.Property(x => x.IsDeleted)
-                .HasColumnName("IS_DALETED")
+                .HasColumnName("IS_DELETED")
                 .HasDefaultValueSql("0")
                 .HasColumnOrder(30);
         }

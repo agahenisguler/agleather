@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class agah4 : Migration
+    public partial class Deneme : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,12 +35,12 @@ namespace AgLeather.Shop.Persistance.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NAME = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    CATEGORY_NAME = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -73,10 +73,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     UNIT_IN_STOCK = table.Column<int>(type: "int", nullable: false),
                     UNIT_PRICE = table.Column<int>(type: "int", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -126,10 +126,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     BIRTHDATE = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GENDER = table.Column<int>(type: "int", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -158,10 +158,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     ORDER = table.Column<int>(type: "int", nullable: false),
                     IS_THUMB_NAIL = table.Column<bool>(type: "bit", nullable: true),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -187,10 +187,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     DISLIKE_COUNT = table.Column<int>(type: "int", nullable: false),
                     IS_APPROVED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0"),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -221,10 +221,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     DELIVERY_TYPE = table.Column<int>(type: "int", nullable: false),
                     GIFT_PACKT = table.Column<bool>(type: "bit", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
@@ -253,10 +253,10 @@ namespace AgLeather.Shop.Persistance.Migrations
                     TOTAL_PRICE = table.Column<int>(type: "int", nullable: false),
                     ORDER_ID = table.Column<int>(type: "int", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CREATE_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MODIFIED_DATED = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MODIFIED_BY = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                    CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MODIFIED_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
+                    IS_DELETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {

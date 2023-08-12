@@ -1,3 +1,4 @@
+using AgLeather.Shop.Application.Automap;
 using AgLeather.Shop.Application.Services.Abstractions;
 using AgLeather.Shop.Application.Services.Implementation;
 using AgLeather.Shop.Persistance.Context;
@@ -15,7 +16,12 @@ builder.Services.AddDbContext<AgLeatherContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AgLeatherConnection"));
 });
+
+//Bussiness Service Registiration
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+//Automapper
+builder.Services.AddAutoMapper(typeof(DomainToDto), typeof(ViewModelToDomain));
 
 var app = builder.Build();
 

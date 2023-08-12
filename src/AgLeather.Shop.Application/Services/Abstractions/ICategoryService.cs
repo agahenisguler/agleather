@@ -10,8 +10,8 @@ namespace AgLeather.Shop.Application.Services.Abstractions
 
         #region Select
 
-        Task<List<CategoryDto>> GetAllCategory();
-        Task<CategoryDto> GetCategoryById(int id);
+        Task<List<CategoryDto>> GetAllCategories();
+        Task<CategoryDto> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM);
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace AgLeather.Shop.Application.Services.Abstractions
 
         Task<int> CreateCategory(CreateCategoryVM createCategoryVM); 
         Task<int> UpdateCategory(UpdateCategoryVM updateCategoryVM);  
-        Task<int> DeleteCategory(int id);
+        Task<int> DeleteCategory(DeleteCategoryVM deleteCategoryVM);
 
         #endregion
 
