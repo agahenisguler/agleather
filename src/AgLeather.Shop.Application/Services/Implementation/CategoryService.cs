@@ -1,12 +1,18 @@
-﻿using AgLeather.Shop.Application.Models.Dtos;
+﻿using AgLeather.Shop.Application.Exceptions;
+using AgLeather.Shop.Application.Models.Dtos;
 using AgLeather.Shop.Application.Models.RequestModels;
 using AgLeather.Shop.Application.Services.Abstractions;
+using AgLeather.Shop.Application.Validators;
+using AgLeather.Shop.Application.Validators.Categories;
 using AgLeather.Shop.Application.Wrapper;
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Persistance.Context;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using AgLeather.Shop.Application.Behaviors;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgLeather.Shop.Application.Services.Implementation
 {
@@ -14,6 +20,10 @@ namespace AgLeather.Shop.Application.Services.Implementation
     {
         private readonly AgLeatherContext _context;
         private readonly IMapper _mapper;
+        private readonly IValidator<GetCategoryByIdVM> _categoryIdValidator;
+        private readonly IValidator<CreateCategoryVM> _createCategoryValidator;
+        private readonly IValidator<DeleteCategoryVM> _deleteCategoryValidator;
+        private readonly IValidator<UpdateCategoryVM> _updateCategoryValidator;
 
         public CategoryService(AgLeatherContext context, IMapper mapper)
         {
@@ -39,7 +49,9 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
         }
 
+        [ValidationBehavior(typeof(GetCategoryByIdValidator))]
         public async Task<Result<CategoryDto>> GetCategoryById(GetCategoryByIdVM getCategoryByIdVM)
+
         {
             //var categoryEntity = await _context.Categories.FindAsync(id);
             //var categoryDto = new CategoryDto
@@ -50,10 +62,11 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
             var result=new Result<CategoryDto>();
 
+            
             var categoryExists = await _context.Categories.AnyAsync(x => x.Id == getCategoryByIdVM.Id);
             if (!categoryExists)
             {
-                throw new Exception($"{getCategoryByIdVM.Id} numarali kategori bulunamadı.");
+                throw new NotFoundException($"{getCategoryByIdVM.Id} numarali kategori bulunamadı.");
             }
 
             var categoryDto = await _context.Categories
@@ -63,6 +76,8 @@ namespace AgLeather.Shop.Application.Services.Implementation
             result.Data = categoryDto;
                         return result;
         }
+
+        [ValidationBehavior(typeof(CreateCategoryValidator))]
         public async Task<Result<int>> CreateCategory(CreateCategoryVM createCategoryVM)
         {
             //Yeni bir kategori entity nesnesi
@@ -73,6 +88,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
             var result=new Result<int>();
 
+          
             var categoryEntity = _mapper.Map<CreateCategoryVM, Category>(createCategoryVM);
 
             //Üretilen entity kategori koleksiyonuna ekleniyor.
@@ -83,16 +99,22 @@ namespace AgLeather.Shop.Application.Services.Implementation
             return result;  
         }
 
+        [ValidationBehavior(typeof(DeleteCategoryValidator))]
         public async Task<Result<int>> DeleteCategory(DeleteCategoryVM deleteCategoryVM)
         {
             var result = new Result<int>();
+
+                   
+            var x = 0;
+            var y = 3 / x;
 
             //Gönderilen id bilgisine karşılık gelen bir kategory var mı?
             var categoryExist = await _context.Categories.AnyAsync(x => x.Id == deleteCategoryVM.Id);
             if (!categoryExist)
             {
-                throw new Exception($"{deleteCategoryVM.Id} numarali kategori bulunamadi.");
+                throw new NotFoundException($"{deleteCategoryVM.Id} numarali kategori bulunamadi.");
             }
+
 
             //Veritabanında kayıtlı kategori getirelim.
             var existsCategory = await _context.Categories.FindAsync(deleteCategoryVM.Id);
@@ -106,9 +128,13 @@ namespace AgLeather.Shop.Application.Services.Implementation
             return result;
         }
 
+        [ValidationBehavior(typeof(UpdateCategoryValidator))]
         public async Task<Result<int>> UpdateCategory(UpdateCategoryVM updateCategoryVM)
         {
+
             var result = new Result<int>();
+
+          
             //Gönderilen id bilgisine karşılık gelen bir kategory var mı?
             var categoryExist = await _context.Categories.AnyAsync(x => x.Id == updateCategoryVM.Id);
             if (!categoryExist)
@@ -116,6 +142,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
                 throw new Exception($"{updateCategoryVM} numarali kategori bulunamadi.");
 
             }
+
 
             var updatedCategory = _mapper.Map<UpdateCategoryVM, Category>(updateCategoryVM);
 

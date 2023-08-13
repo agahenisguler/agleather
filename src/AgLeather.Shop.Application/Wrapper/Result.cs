@@ -10,6 +10,6 @@ namespace AgLeather.Shop.Application.Wrapper
     {
         public T Data { get; set; }
         public bool Success { get; set; }   = true;
-        public List<String> Errors { get; set; }=new List<String>();
+        public List<string> Errors { get; set; }=new List<string>();
     }
 }
