@@ -1,4 +1,6 @@
 ﻿using ArxOne.MrAdvice.Advice;
+using Microsoft.Identity.Client;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,6 +25,8 @@ namespace AgLeather.Shop.Application.Behaviors
             watch.Stop();
 
             var totalDuration = watch.Elapsed.TotalSeconds;
+
+            Log.Information($"{context.TargetName} metodu {totalDuration} saniyede tamamlandı");
         }
     }
 }
