@@ -4,8 +4,10 @@ using AgLeather.Shop.Application.Repositories;
 using AgLeather.Shop.Application.Services.Abstractions;
 using AgLeather.Shop.Application.Services.Implementation;
 using AgLeather.Shop.Application.Validators;
+using AgLeather.Shop.Domain.UWork;
 using AgLeather.Shop.Persistance.Context;
 using AgLeather.Shop.Persistance.Repositories;
+using AgLeather.Shop.Persistance.UWork;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -37,6 +39,8 @@ builder.Services.AddDbContext<AgLeatherContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AgLeatherConnection"));
 });
+
+builder.Services.AddScoped<IUnitWork, UnitWork>();
 
 //Repository Registitaction 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
