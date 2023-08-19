@@ -25,15 +25,16 @@ namespace AgLeather.Shop.Persistance.Repositories
         {
             return await Task.FromResult(_dbContext.Set<T>().Where(filter));
         }
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
-        {
-            return await _dbContext.Set<T>().AnyAsync(filter);
-        }
         public async Task<T> GetById(object id)
         {
             var entity = await _dbContext.Set<T>().FindAsync(id);
             return entity;
         }
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
+        {
+            return await _dbContext.Set<T>().AnyAsync(filter);
+        }
+        
         public async Task Add(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);

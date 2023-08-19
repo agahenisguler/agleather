@@ -30,7 +30,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
         //Ctrl+M+O   
         //Automapper : Bir modeli başka bir modele çevirmek için kullanılır.
-       
+        [PerformanceBehaviors]
         public async Task<Result<List<CategoryDto>>> GetAllCategories()
         {
             var result=new Result<List<CategoryDto>>();

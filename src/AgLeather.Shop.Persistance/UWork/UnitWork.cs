@@ -5,6 +5,7 @@ using AgLeather.Shop.Persistance.Context;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Security.AccessControl;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace AgLeather.Shop.Persistance.UWork
 {
@@ -48,13 +49,10 @@ namespace AgLeather.Shop.Persistance.UWork
             {
                 return (IRepository<T>)_repositories[typeof(IRepository<T>)];
             }
-
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var repository = scope.ServiceProvider.GetRequiredService<IRepository<T>>();
-                _repositories.Add(typeof(IRepository<T>), repository);
-                return repository;
-            }
+            var scope = _serviceProvider.CreateScope();
+            var repository = scope.ServiceProvider.GetRequiredService<IRepository<T>>();
+            _repositories.Add(typeof(IRepository<T>), repository);
+            return repository;
 
         }
 
