@@ -39,13 +39,15 @@ namespace AgLeather.Shop.Application.Services.Implementation
             //var categoryDtos = _mapper.Map<List<Category> ,List<CategoryDto>>(categories);
 
             var categoryEntities = await _db.GetRepository<Category>().GetAllAsync();
-
-            var categoryDtos = _mapper.Map<List<Category>, List<CategoryDto>>(categoryEntities);
+            var categoryDtos=await categoryEntities.ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+            //var categoryDtos = _mapper.Map<List<Category>, List<CategoryDto>>(categoryEntities);
 
             //var categoryDtos = await _context.Categories
             //    .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
             //    .ToListAsync();
             result.Data = categoryDtos;
+            _db.Dispose();
 
             return result;
 
@@ -80,7 +82,8 @@ namespace AgLeather.Shop.Application.Services.Implementation
             var categoryDto = _mapper.Map<Category, CategoryDto > (catagoryEntity);
 
             result.Data = categoryDto;
-                        return result;
+            _db.Dispose();
+            return result;
         }
 
         [ValidationBehavior(typeof(CreateCategoryValidator))]
@@ -107,6 +110,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
            
 
             result.Data = categoryEntity.Id;
+            _db.Dispose();
             return result;  
         }
 
@@ -136,6 +140,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
             //await _context.SaveChangesAsync();
 
             result.Data= deleteCategoryVM.Id;
+            _db.Dispose();
             return result;
         }
 
@@ -168,6 +173,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
             await _db.GetRepository<Category>().Update(updatedCategory);
 
             result.Data=updatedCategory.Id;
+            _db.Dispose();
             return result;
         }
 

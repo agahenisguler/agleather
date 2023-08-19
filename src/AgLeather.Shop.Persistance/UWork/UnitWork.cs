@@ -3,6 +3,8 @@ using AgLeather.Shop.Domain.Common;
 using AgLeather.Shop.Domain.UWork;
 using AgLeather.Shop.Persistance.Context;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System.Security.AccessControl;
 
 namespace AgLeather.Shop.Persistance.UWork
 {
@@ -16,7 +18,6 @@ namespace AgLeather.Shop.Persistance.UWork
         {
             _repositories = new Dictionary<Type, object>();
             _serviceProvider = serviceProvider;
-            _context = context;
             _context = context;
         }
 
@@ -57,6 +58,34 @@ namespace AgLeather.Shop.Persistance.UWork
 
         }
 
-       
+        #region Dispose
+
+        bool _disposed = false;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+            // TODO: set large fields to null.
+
+            _disposed = true;
+        }
+
+        #endregion
     }
 }

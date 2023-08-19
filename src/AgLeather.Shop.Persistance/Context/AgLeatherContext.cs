@@ -7,8 +7,11 @@ namespace AgLeather.Shop.Persistance.Context
 {
     public class AgLeatherContext : DbContext
     {
+
+        public AgLeatherContext(DbContextOptions<AgLeatherContext> options) : base(options)
+        {
+        }
         #region DbSet
-        public AgLeatherContext(DbContextOptions<AgLeatherContext> options) : base(options) { }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -53,6 +56,7 @@ namespace AgLeather.Shop.Persistance.Context
             //Herhangi bir kayıt işleminde yapılan işlem güncelleme ise ModifiedDate ve ModifiedBy bilgileri otomatik olarak set edilir.
 
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())
+            {
                 switch (entry.State)
                 {
                     //update
@@ -69,14 +73,19 @@ namespace AgLeather.Shop.Persistance.Context
                     case EntityState.Deleted:
                         entry.Entity.ModifiedDate = DateTime.Now;
                         entry.Entity.ModifiedBy = "admin";
-                        entry.Entity.IsDeleted = true;  
-                        entry.State= EntityState.Modified;  
+                        entry.Entity.IsDeleted = true;
+                        entry.State = EntityState.Modified;
                         break;
                     default:
                         break;
 
                 }
+               
+                
+
+            }
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+
         }
         
     }
