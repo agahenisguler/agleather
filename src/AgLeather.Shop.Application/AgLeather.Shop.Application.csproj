@@ -20,4 +20,13 @@
     <PackageReference Include="Serilog" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\RequestModels\Catagories\" />
+    <Folder Include="Models\RequestModels\Cities\" />
+    <Folder Include="Models\RequestModels\Products\" />
+    <Folder Include="Models\RequestModels\ProductImages\" />
+    <Folder Include="Models\RequestModels\Orders\" />
+    <Folder Include="Models\RequestModels\OrderDetails\" />
+  </ItemGroup>
+
 </Project>
