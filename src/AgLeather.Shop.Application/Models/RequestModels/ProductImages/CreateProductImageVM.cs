@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.ProductImages
 {
-    internal class CreateProductImageVM
+    public class CreateProductImageVM
     {
+        public int? ProductId { get; set; }
+        public int? Order { get; set; } = 0;
+        public bool? IsThumbnail { get; set; }
+        public IFormFile UploadedImage { get; set; }
     }
 }

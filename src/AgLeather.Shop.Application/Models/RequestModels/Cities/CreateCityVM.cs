@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.Cities
 {
-    internal class CreateCityVM
+    public class CreateCityVM
     {
+        public string Name { get; set; }
     }
 }

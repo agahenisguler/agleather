@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.Orders
 {
-    internal class CreateOrderVM
+    public class CreateOrderVM
     {
+        public int? CustomerId { get; set; }
+        public int? AddressId { get; set; }
     }
 }

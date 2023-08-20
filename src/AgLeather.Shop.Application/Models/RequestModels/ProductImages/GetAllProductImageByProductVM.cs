@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.ProductImages
 {
-    internal class GetAllProductImageByProductVM
+    public class GetAllProductImageByProductVM
     {
+        public int? ProductId { get; set; }
     }
 }

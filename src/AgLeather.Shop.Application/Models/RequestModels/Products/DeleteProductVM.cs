@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.Products
 {
-    internal class DeleteProductVM
+    public class DeleteProductVM
     {
+        public int? Id { get; set; }
     }
 }
