@@ -3,15 +3,13 @@ using AgLeather.Shop.Application.Exceptions;
 using AgLeather.Shop.Application.Models.Dtos.OrderDetails;
 using AgLeather.Shop.Application.Models.RequestModels.OrderDetails;
 using AgLeather.Shop.Application.Services.Abstractions;
+using AgLeather.Shop.Application.Validators.OrderDetails;
 using AgLeather.Shop.Application.Wrapper;
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Domain.UWork;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgLeather.Shop.Application.Services.Implementation
 {

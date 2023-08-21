@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AgLeather.Shop.Application.Models.RequestModels.OrderDetails;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,16 +3,16 @@ using AgLeather.Shop.Application.Exceptions;
 using AgLeather.Shop.Application.Models.Dtos.ProductImages;
 using AgLeather.Shop.Application.Models.RequestModels.ProductImages;
 using AgLeather.Shop.Application.Services.Abstractions;
+using AgLeather.Shop.Application.Validators.ProductImages;
 using AgLeather.Shop.Application.Wrapper;
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Domain.UWork;
+using AgLeather.Shop.Utils;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace AgLeather.Shop.Application.Services.Implementation
 {
@@ -20,10 +20,10 @@ namespace AgLeather.Shop.Application.Services.Implementation
     {
         private readonly IUnitWork _unitWork;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IConfiguration _configuration;
 
-        public ProductImageService(IUnitWork unitWork, IMapper mapper, IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
+        public ProductImageService(IUnitWork unitWork, IMapper mapper, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
             _unitWork = unitWork;
             _mapper = mapper;
@@ -68,8 +68,10 @@ namespace AgLeather.Shop.Application.Services.Implementation
                 throw new NotFoundException($"{createProductImageVM.ProductId} numaralı ürün bulunamadı.");
             }
             //Dosyanın ismi belirleniyor.
-            var fileName = PathUtil.GenerateFileName(createProductImageVM.UploadedImage);
-            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, _configuration["Paths:ProductImages"], fileName);
+            var date = DateTime.Now;
+            var extension = Path.GetExtension(createProductImageVM.UploadedImage.FileName);
+            var fileName = PathUtil.$"{date.Day}_{date.Month}_{date.Year}_{date.Hour}_{date.Minute}_{date.Second}_{date.Millisecond}.{extension}"; 
+            var filePath = Path.Combine(_hostingEnvironment.Web);
             //Dosya fiziksel olarak kaydediliyor.
             using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
@@ -116,6 +118,8 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
             result.Data = existsProductImage.Id;
             return result;
+
+
         }
     }
 }

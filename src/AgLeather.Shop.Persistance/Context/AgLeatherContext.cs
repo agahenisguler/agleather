@@ -1,5 +1,6 @@
 ﻿using AgLeather.Shop.Domain.Common;
 using AgLeather.Shop.Domain.Entities;
+using AgLeather.Shop.Domain.Services.Abstraction;
 using AgLeather.Shop.Persistance.Mappings;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +8,15 @@ namespace AgLeather.Shop.Persistance.Context
 {
     public class AgLeatherContext : DbContext
     {
+        private readonly ILoggedUserService _loggedUserService;
 
-        public AgLeatherContext(DbContextOptions<AgLeatherContext> options) : base(options)
+        public AgLeatherContext(DbContextOptions<AgLeatherContext> options, ILoggedUserService loggedUserService) : base(options)
         {
+            _loggedUserService = loggedUserService;
         }
+
         #region DbSet
+
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -24,8 +29,10 @@ namespace AgLeather.Shop.Persistance.Context
         public DbSet<ProductImage> ProductImages { get; set; }
 
         #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             modelBuilder.ApplyConfiguration(new AccountMapping());
             modelBuilder.ApplyConfiguration(new AddressMapping());
             modelBuilder.ApplyConfiguration(new CategoryMapping());
@@ -37,7 +44,7 @@ namespace AgLeather.Shop.Persistance.Context
             modelBuilder.ApplyConfiguration(new ProductMapping());
             modelBuilder.ApplyConfiguration(new ProductImageMapping());
 
-            //Aşağıdaki entity türleri için IsDeleted bilgisi false olanların otomatik olarak filtrelenmesi sağlanır.
+            //Aşağıdaki entity türleri için isDeleted bilgisi false olanların otomatik olarak filtrelenmesi sağlanır.
             modelBuilder.Entity<Account>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
             modelBuilder.Entity<Address>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
             modelBuilder.Entity<Category>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
@@ -48,47 +55,56 @@ namespace AgLeather.Shop.Persistance.Context
             modelBuilder.Entity<OrderDetail>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
             modelBuilder.Entity<Product>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
             modelBuilder.Entity<ProductImage>().HasQueryFilter(x => x.IsDeleted == null || (x.IsDeleted.HasValue && !x.IsDeleted.Value));
-
         }
+
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
-            //Herhangi bir kayıt işleminde yapılan işlem ekleme ise CrateDate ve CreateBy bilgileri otomatik olarak set edilir.
+            //Herhangi bir kayıt işleminde yapılan işlem ekleme ise CreateDate ve CreatedBy bilgileri otomatik olarak set edilir.
             //Herhangi bir kayıt işleminde yapılan işlem güncelleme ise ModifiedDate ve ModifiedBy bilgileri otomatik olarak set edilir.
 
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>().ToList())
+            var entries = ChangeTracker.Entries<BaseEntity>().ToList();
+
+            foreach (var entry in entries)
             {
-                switch (entry.State)
+                if (entry.State == EntityState.Deleted)
                 {
-                    //update
-                    case EntityState.Modified:
-                        entry.Entity.ModifiedDate = DateTime.Now;
-                        entry.Entity.ModifiedBy = "admin";
-                        break;
-
-                    case EntityState.Added:
-                        entry.Entity.CreateDate = DateTime.Now;
-                        entry.Entity.CreateBy = "admin";
-                        break;
-
-                    case EntityState.Deleted:
-                        entry.Entity.ModifiedDate = DateTime.Now;
-                        entry.Entity.ModifiedBy = "admin";
-                        entry.Entity.IsDeleted = true;
-                        entry.State = EntityState.Modified;
-                        break;
-                    default:
-                        break;
-
+                    entry.Entity.IsDeleted = true;
+                    entry.State = EntityState.Modified;
                 }
-               
-                
+
+                if (entry.Entity is AuditableEntity auditableEntity)
+                {
+                    switch (entry.State)
+                    {
+                        //update
+                        case EntityState.Modified:
+                            auditableEntity.ModifiedDate = DateTime.Now;
+                            auditableEntity.ModifiedBy = _loggedUserService.Username ?? "admin";
+                            break;
+                        //insert
+                        case EntityState.Added:
+                            auditableEntity.CreateDate = DateTime.Now;
+                            auditableEntity.CreateBy = _loggedUserService.Username ?? "admin";
+                            break;
+                        //delete
+                        case EntityState.Deleted:
+                            auditableEntity.ModifiedDate = DateTime.Now;
+                            auditableEntity.ModifiedBy = _loggedUserService.Username ?? "admin";
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
             }
+
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
 
+
+
         }
-        
     }
-
-
 }
+
+
+

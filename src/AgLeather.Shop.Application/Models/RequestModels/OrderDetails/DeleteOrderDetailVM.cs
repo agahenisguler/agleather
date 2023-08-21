@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels.OrderDetails
 {
-    public class UpdateOrderDetailVM
+    public class DeleteOrderDetailVM
     {
         public int? OrderDetailId { get; set; }
     }

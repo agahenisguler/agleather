@@ -6,6 +6,7 @@ using AgLeather.Shop.Application.Wrapper;
 using AgLeather.Shop.Domain.Entities;
 using AgLeather.Shop.Domain.UWork;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace AgLeather.Shop.Application.Services.Implementation
 {

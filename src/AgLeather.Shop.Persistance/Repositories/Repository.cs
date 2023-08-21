@@ -10,58 +10,88 @@ namespace AgLeather.Shop.Persistance.Repositories
         where T : BaseEntity
         
     {
-        private readonly AgLeatherContext _dbContext;
+        private readonly DbSet<T> _dbSet;
+
         public Repository(AgLeatherContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbSet = dbContext.Set<T>();
         }
 
-        public async Task<IQueryable<T>> GetAllAsync()
+        public async Task<IQueryable<T>> GetAllAsync(params string[] includeColumns)
         {
-            return await Task.FromResult(_dbContext.Set<T>());
+            IQueryable<T> query = _dbSet;
+
+            if (includeColumns.Any())
+            {
+                foreach (var includeColumn in includeColumns)
+                {
+                    query = query.Include(includeColumn);
+                }
+            }
+            return await Task.FromResult(query);
         }
 
-        public async Task<IQueryable<T>> GetByFilterAsync(Expression<Func<T, bool>> filter)
+        public async Task<IQueryable<T>> GetByFilterAsync(Expression<Func<T, bool>> filter, params string[] includeColumns)
         {
-            return await Task.FromResult(_dbContext.Set<T>().Where(filter));
+            IQueryable<T> query = _dbSet;
+
+            if (includeColumns.Any())
+            {
+                foreach (var includeColumn in includeColumns)
+                {
+                    query = query.Include(includeColumn);
+                }
+            }
+            return await Task.FromResult(query.Where(filter));
         }
+
+        public async Task<T> GetSingleByFilterAsync(Expression<Func<T, bool>> filter, params string[] includeColumns)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (includeColumns.Any())
+            {
+                foreach (var includeColumn in includeColumns)
+                {
+                    query = query.Include(includeColumn);
+                }
+            }
+            return await query.FirstOrDefaultAsync(filter);
+        }
+
         public async Task<T> GetById(object id)
         {
-            var entity = await _dbContext.Set<T>().FindAsync(id);
+            var entity = await _dbSet.FindAsync(id);
             return entity;
         }
+
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
         {
-            return await _dbContext.Set<T>().AnyAsync(filter);
+            return await _dbSet.AnyAsync(filter);
         }
-        
-        public async Task Add(T entity)
+
+
+        public void Add(T entity)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            _dbSet.Add(entity);
         }
 
-        public async Task Delete(T entity)
+        public void Update(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
-
-
+            _dbSet.Update(entity);
         }
-        public async Task Update(T entity)
+
+        public void Delete(T entity)
         {
-            _dbContext.Update(entity);
-            await _dbContext.SaveChangesAsync();
-
+            _dbSet.Remove(entity);
         }
 
-        public async Task Delete(object id)
+        public void Delete(object id)
         {
-            await _dbContext.Set<T>().FindAsync(id);
-            await _dbContext.SaveChangesAsync();
-
+            var item = _dbSet.Find(id);
+            _dbSet.Remove(item);
         }
 
-     
+
     }
 }
