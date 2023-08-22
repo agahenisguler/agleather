@@ -141,10 +141,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 //Kalýcý olarak saklanacak dosyalar için kayýt yeri ayarlanýyor.
-app.UseStaticFiles(new StaticFileOptions
-{
-    RequestPath = "product_ýmages"
-}
-););
+app.UseStaticFiles();
 
 app.Run();

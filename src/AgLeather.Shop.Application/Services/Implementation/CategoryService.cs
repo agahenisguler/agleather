@@ -100,8 +100,8 @@ namespace AgLeather.Shop.Application.Services.Implementation
           
             var categoryEntity = _mapper.Map<CreateCategoryVM, Category>(createCategoryVM);
 
-            await _db.GetRepository<Category>().Add(categoryEntity);
-            await _db.CommitAsync();
+             _db.GetRepository<Category>().Add(categoryEntity);
+             _db.CommitAsync();
 
             //Üretilen entity kategori koleksiyonuna ekleniyor.
             //await _context.Categories.AddAsync(categoryEntity);
@@ -131,7 +131,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
 
             //Veritabanında kayıtlı kategori getirelim.
             //var existsCategory = await _context.Categories.FindAsync(deleteCategoryVM.Id);
-            await _db.GetRepository<Category>().Delete(deleteCategoryVM.Id);
+             _db.GetRepository<Category>().Delete(deleteCategoryVM.Id);
             await _db.CommitAsync();
             //Silindi olarak işaretleyiniz.
             //existsCategory.IsDeleted = true;
@@ -170,7 +170,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
             //_context.Categories.Update(updatedCategory);
             //await _context.SaveChangesAsync();
 
-            await _db.GetRepository<Category>().Update(updatedCategory);
+         _db.GetRepository<Category>().Update(updatedCategory);
 
             result.Data=updatedCategory.Id;
             _db.Dispose();
