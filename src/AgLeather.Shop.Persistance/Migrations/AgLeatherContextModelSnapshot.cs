@@ -61,6 +61,11 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnName("PASSWORD")
                         .HasColumnOrder(4);
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int")
+                        .HasColumnName("ROLE_ID")
+                        .HasColumnOrder(7);
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)")

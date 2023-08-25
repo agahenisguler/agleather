@@ -2,12 +2,12 @@
 {
     public class UnauthorizedException : Exception
     {
-        public UnauthorizedException(string message):base(message)
+        public UnauthorizedException(string message) : base(message)
         {
 
         }
 
-        public UnauthorizedException():base("Bu alana erişim yetkiniz bulunmamaktadır.")
+        public UnauthorizedException() : base("Bu alana erişim yetkiniz bulunmamaktadır.")
         {
 
         }

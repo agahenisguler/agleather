@@ -17,7 +17,7 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasColumnName("ADDRESS_ID")
                 .HasColumnOrder(3);
 
-            builder.Property(x=>x.OrderDate)
+            builder.Property(x => x.OrderDate)
                 .HasColumnName("ORDER_DATE")
                 .HasDefaultValueSql("getdate()")    //Bu alan boş bırakılabilir.
                 .HasColumnOrder(4);
@@ -26,14 +26,6 @@ namespace AgLeather.Shop.Persistance.Mappings
                 .HasColumnName("ORDER_STATUS")
                 .HasColumnOrder(5);
 
-            builder.Property(x => x.DeliveryType)
-                .HasColumnName("DELIVERY_TYPE")
-                .IsRequired()
-                .HasColumnOrder(6);
-
-            builder.Property(x => x.GiftPackt)
-                .HasColumnName("GIFT_PACKT")
-                .HasColumnOrder(7);
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Orders)
@@ -48,14 +40,6 @@ namespace AgLeather.Shop.Persistance.Mappings
 
 
             builder.ToTable("ORDERS");
-
-
-
-
-
-
-
-
 
         }
     }

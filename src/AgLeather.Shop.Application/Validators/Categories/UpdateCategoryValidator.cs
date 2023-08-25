@@ -5,7 +5,7 @@ namespace AgLeather.Shop.Application.Validators.Categories
 {
     public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryVM>
     {
-        public UpdateCategoryValidator() 
+        public UpdateCategoryValidator()
         {
             RuleFor(x => x.Id)
              .NotEmpty()

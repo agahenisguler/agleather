@@ -6,7 +6,7 @@ using AgLeather.Shop.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AgLeather.APİ.Controllers
+namespace AgLeather.API.Controllers
 {
 
     //Endpoint url : [ControllerRoute]/[ActionRoute]

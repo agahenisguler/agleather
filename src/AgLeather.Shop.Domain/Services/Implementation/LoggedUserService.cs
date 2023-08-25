@@ -25,9 +25,6 @@ namespace AgLeather.Shop.Domain.Services.Implementation
         public string Username => GetClaim(ClaimTypes.Name) != null ? GetClaim(ClaimTypes.Name) : null;
 
         public string Email => GetClaim(ClaimTypes.Email) != null ? GetClaim(ClaimTypes.Email) : null;
-
-
-
         private string GetClaim(string claimType)
         {
             return _httpContextAccessor?.HttpContext?.User.Claims.FirstOrDefault(x => x.Type == claimType)?.Value;

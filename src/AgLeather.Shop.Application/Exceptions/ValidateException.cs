@@ -7,8 +7,8 @@ namespace AgLeather.Shop.Application.Exceptions
         public List<string> ErrorMessages { get; set; }
         public ValidateException(ValidationResult result) : base()
         {
-            ErrorMessages = result.Errors.Select(x=>x.ErrorMessage).ToList();
+            ErrorMessages = result.Errors.Select(x => x.ErrorMessage).ToList();
         }
-       
+
     }
 }

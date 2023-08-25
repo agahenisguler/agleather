@@ -1,4 +1,4 @@
-using AgLeather.APÝ.Filters;
+using AgLeather.API.Filters;
 using AgLeather.Shop.Application.Automap;
 using AgLeather.Shop.Application.Repositories;
 using AgLeather.Shop.Application.Services.Abstractions;

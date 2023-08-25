@@ -7,7 +7,7 @@ using AgLeather.Shop.Application.Wrapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AgLeather.APİ.Controllers
+namespace AgLeather.API.Controllers
 {
 
     [ApiController]

@@ -38,16 +38,6 @@ namespace AgLeather.Shop.Persistance.Mappings
 
 
             builder.ToTable("PRODUCT_IMAGES");
-
-
-
-
-
-
-
-
-
-
         }
     }
 }

@@ -19,3 +19,4 @@ namespace AgLeather.Shop.Application.Models.Dtos.Customers
         public Gender Gender { get; set; }
     }
 }
+

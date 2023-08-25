@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Models.RequestModels
 {
-    public class GetCategoryByIdVM 
+    public class GetCategoryByIdVM
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
     }
 }

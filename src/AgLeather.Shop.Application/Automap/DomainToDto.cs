@@ -37,5 +37,8 @@ namespace AgLeather.Shop.Application.Automap
 
 
         }
+
+
     }
+    
 }

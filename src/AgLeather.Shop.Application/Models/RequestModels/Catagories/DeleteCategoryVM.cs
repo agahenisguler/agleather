@@ -8,6 +8,6 @@ namespace AgLeather.Shop.Application.Models.RequestModels
 {
     public class DeleteCategoryVM
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
     }
 }

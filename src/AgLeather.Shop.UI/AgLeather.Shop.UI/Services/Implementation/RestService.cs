@@ -18,7 +18,7 @@ namespace AgLeather.Shop.UI.Services.Implementation
             _contextAccessor = contextAccessor;
         }
 
-        
+
 
         #region Post İstekleri
 
@@ -193,7 +193,7 @@ namespace AgLeather.Shop.UI.Services.Implementation
             RestClient restClient = new RestClient(apiUrl);
             RestRequest restRequest = new RestRequest(endpointUrl, Method.Post);
 
-            
+
             restRequest.AddHeader("Accept", "application/json");
             restRequest.AddHeader("Content-Type", "multipart/form-data");
 
@@ -205,7 +205,7 @@ namespace AgLeather.Shop.UI.Services.Implementation
             if (file != null)
             {
                 restRequest.AddFile("UploadedImage", file.FileName);
-            }            
+            }
 
             if (tokenRequired && GetToken() != null)
             {

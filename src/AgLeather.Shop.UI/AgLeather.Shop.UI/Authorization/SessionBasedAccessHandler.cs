@@ -20,7 +20,7 @@ namespace AgLeather.Shop.UI.Authorization
             var sessionKey = _configuration["Application:SessionKey"];
 
             //Kullanıcı bilgileri session'a eklenmemişse login olmuş kullanıcı değildir.
-            if(_contextAccessor.HttpContext.Session?.GetString(sessionKey) is null)
+            if (_contextAccessor.HttpContext.Session?.GetString(sessionKey) is null)
             {
                 context.Fail();
                 return Task.CompletedTask;

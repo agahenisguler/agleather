@@ -2,11 +2,10 @@
 using AgLeather.Shop.Application.Models.RequestModels.Cities;
 using AgLeather.Shop.Application.Services.Abstractions;
 using AgLeather.Shop.Application.Wrapper;
-using AgLeather.Shop.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AgLeather.APİ.Controllers
+namespace AgLeather.API.Controllers
 {
     [ApiController]
     [Route("city")]

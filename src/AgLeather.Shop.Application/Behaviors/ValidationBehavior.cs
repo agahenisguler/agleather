@@ -1,22 +1,18 @@
 ﻿using AgLeather.Shop.Application.Exceptions;
-using AgLeather.Shop.Application.Models.RequestModels;
-using AgLeather.Shop.Application.Validators;
 using ArxOne.MrAdvice.Advice;
-using AspectCore.DynamicProxy;
 using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace AgLeather.Shop.Application.Behaviors
 {
     public class ValidationBehavior : Attribute, IMethodAdvice
     {
-        private readonly Type _validatorType; 
+        private readonly Type _validatorType;
 
         public ValidationBehavior(Type validatorType)
         {
             _validatorType = validatorType;
         }
-      
+
         public void Advise(MethodAdviceContext context)
         {
             //Metod çalışmadan önce devreye girecek kodlar..
@@ -40,7 +36,7 @@ namespace AgLeather.Shop.Application.Behaviors
                 }
             }
 
-           
+
 
             context.Proceed(); //Metod tetikleniyor.
 

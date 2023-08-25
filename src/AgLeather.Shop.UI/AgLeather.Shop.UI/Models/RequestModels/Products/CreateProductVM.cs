@@ -7,7 +7,7 @@ namespace AgLeather.Shop.UI.Models.RequestModels.Products
         [Display(Name = "Kategori")]
         public int? CategoryId { get; set; }
 
-        [Display(Name="Ürün adı")]
+        [Display(Name = "Ürün adı")]
         public string Name { get; set; }
 
         [Display(Name = "Açıklama")]

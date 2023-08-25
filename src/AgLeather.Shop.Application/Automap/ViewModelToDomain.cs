@@ -50,7 +50,6 @@ namespace AgLeather.Shop.Application.Automap
             //OrderDetail
             CreateMap<CreateOrderDetailVM, OrderDetail>();
 
-
         }
     }
 }

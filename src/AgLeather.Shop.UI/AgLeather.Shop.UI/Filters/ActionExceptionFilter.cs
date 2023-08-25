@@ -14,12 +14,12 @@ namespace AgLeather.Shop.UI.Filters
             var tempDataDictionaryFactory = (ITempDataDictionaryFactory)context.HttpContext.RequestServices.GetService(typeof(ITempDataDictionaryFactory));
             var tempData = tempDataDictionaryFactory.GetTempData(context.HttpContext);
 
-            if(context.Exception is UnauthenticatedException unauthenticatedException)
+            if (context.Exception is UnauthenticatedException unauthenticatedException)
             {
                 tempData["error"] = unauthenticatedException.Message;
                 context.Result = new RedirectToActionResult("SignIn", "Login", new { Area = "Admin" });
             }
-            else if(context.Exception is UnauthorizedException unauthorizedException)
+            else if (context.Exception is UnauthorizedException unauthorizedException)
             {
                 tempData["error"] = unauthorizedException.Message;
                 context.Result = new RedirectToActionResult("SignIn", "Login", new { Area = "Admin" });

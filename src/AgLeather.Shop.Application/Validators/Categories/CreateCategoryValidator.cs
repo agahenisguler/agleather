@@ -10,7 +10,7 @@ namespace AgLeather.Shop.Application.Validators
 {
     public class CreateCategoryValidator : AbstractValidator<CreateCategoryVM>
     {
-        public CreateCategoryValidator() 
+        public CreateCategoryValidator()
         {
             RuleFor(x => x.CategoryName)
                 .NotEmpty()

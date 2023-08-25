@@ -18,8 +18,8 @@ namespace AgLeather.Shop.Application.Services.Abstractions
 
         #region Insert, Update, Delete
 
-        Task<Result<int>> CreateCategory(CreateCategoryVM createCategoryVM); 
-        Task<Result<int>> UpdateCategory(UpdateCategoryVM updateCategoryVM);  
+        Task<Result<int>> CreateCategory(CreateCategoryVM createCategoryVM);
+        Task<Result<int>> UpdateCategory(UpdateCategoryVM updateCategoryVM);
         Task<Result<int>> DeleteCategory(DeleteCategoryVM deleteCategoryVM);
 
         #endregion

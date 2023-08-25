@@ -1,6 +1,6 @@
 ﻿namespace AgLeather.Shop.UI.Models.Wrapper
 {
-    public class Result<T> where T:new()
+    public class Result<T> where T : new()
     {
         public T Data { get; set; }
         public bool Success { get; set; } = true;

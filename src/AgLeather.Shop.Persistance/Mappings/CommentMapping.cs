@@ -14,9 +14,10 @@ namespace AgLeather.Shop.Persistance.Mappings
 
             builder.Property(x => x.CustomerId)
                 .HasColumnName("CUSTOMER_ID")
-                .HasColumnOrder (3);
+                .HasColumnOrder(3);
 
             builder.Property(x => x.Detail)
+                .IsRequired()
                 .HasColumnName("DETAIL")
                 .HasColumnType("nvarchar(max)")
                 .HasColumnOrder(4);
@@ -37,8 +38,7 @@ namespace AgLeather.Shop.Persistance.Mappings
             builder.HasOne(x => x.Product)
                 .WithMany(x => x.Comments)
                 .HasForeignKey(x => x.ProductId)
-                .HasConstraintName("COMMENT_PRODUCT_PRODUCT_ID")
-                .OnDelete(DeleteBehavior.NoAction);
+                .HasConstraintName("COMMENT_PRODUCT_PRODUCT_ID");
 
             builder.HasOne(x => x.Customer)
                 .WithMany(x => x.Comments)

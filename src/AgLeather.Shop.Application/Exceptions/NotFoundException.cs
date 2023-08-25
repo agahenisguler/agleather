@@ -13,9 +13,9 @@ namespace AgLeather.Shop.Application.Exceptions
 
         }
 
-        public NotFoundException() : base() 
+        public NotFoundException() : base()
         {
-            
+
         }
     }
 }

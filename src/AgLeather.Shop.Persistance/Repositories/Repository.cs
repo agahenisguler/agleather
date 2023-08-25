@@ -8,7 +8,7 @@ namespace AgLeather.Shop.Persistance.Repositories
 {
     public class Repository<T> : IRepository<T>
         where T : BaseEntity
-        
+
     {
         private readonly DbSet<T> _dbSet;
 
