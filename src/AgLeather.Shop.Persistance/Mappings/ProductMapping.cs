@@ -4,35 +4,39 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AgLeather.Shop.Persistance.Mappings
 {
-    public class ProductImageMapping : AuditableEntityMapping<ProductImage>
-    {
-        public override void ConfigureDrivedEntityMapping(EntityTypeBuilder<ProductImage> builder)
+    public class ProductMapping : AuditableEntityMapping<Product>
+    {     
+
+        public override void ConfigureDrivedEntityMapping(EntityTypeBuilder<Product> builder)
         {
-            builder.Property(x => x.ProductId)
-                .IsRequired()
-                .HasColumnName("PRODUCT_ID")
+            builder.Property(x => x.CategoryId)
+                .HasColumnName("CATEGORY_ID")
                 .HasColumnOrder(2);
 
-            builder.Property(x => x.Path)
-                .HasColumnName("PATH")
-                .HasColumnType("nvarchar(150)")
+            builder.Property(x => x.Name)
+                .HasColumnName("NAME")
+                .HasColumnType("nvarchar(255)")
                 .HasColumnOrder(3);
 
-            builder.Property(x => x.Order)
-                .HasColumnName("ORDER")
-                .HasColumnOrder(4);
+            builder.Property(x => x.Detail)
+               .HasColumnName("DETAIL")
+               .HasColumnType("nvarchar(max)")
+               .HasColumnOrder(4);
 
-            builder.Property(x => x.IsThumbnail)
-                .HasColumnName("IS_THUMB_NAIL")
-                .HasColumnOrder(5);
+            builder.Property(x => x.UnitInStock)
+               .HasColumnName("UNIT_IN_STOCK")
+               .HasColumnOrder(5);
 
-            builder.HasOne(x => x.Product)
-                .WithMany(x => x.ProductImages)
-                .HasForeignKey(x => x.ProductId)
-                .HasConstraintName("PRODUCT_IMAGE_PRODUCT_PRODUCT_ID");
+            builder.Property(x => x.UnitPrice)
+               .HasColumnName("UNIT_PRICE")
+               .HasColumnOrder(6);
 
+            builder.HasOne(x => x.Category)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.CategoryId)
+                .HasConstraintName("PRODUCT_CATEGORY_CATEGORY_ID");
 
-            builder.ToTable("PRODUCT_IMAGES");
+            builder.ToTable("PRODUCTS");
         }
     }
 }

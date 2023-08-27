@@ -18,7 +18,7 @@ namespace AgLeather.Shop.Persistance.Mappings
             ConfigureDrivedEntityMapping(builder);
 
             builder.Property(x => x.IsDeleted)
-                .HasColumnName("IS_DALETED")
+                .HasColumnName("IS_DELETED")
                 .HasDefaultValueSql("0")
                 .HasColumnOrder(30);
 

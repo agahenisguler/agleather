@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgLeather.Shop.Utils", "AgL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgLeather.Shop.UI", "AgLeather.Shop.UI\AgLeather.Shop.UI\AgLeather.Shop.UI.csproj", "{11103DAC-C8BC-4B7C-B688-DF900F87DAFA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Persistance", "4-Persistance", "{CEF30FFA-1599-4C9A-AE75-F76103AF8630}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Presentation", "4-Presentation", "{CEF30FFA-1599-4C9A-AE75-F76103AF8630}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

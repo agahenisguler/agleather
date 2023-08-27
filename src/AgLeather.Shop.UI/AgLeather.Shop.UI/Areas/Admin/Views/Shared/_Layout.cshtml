@@ -1,110 +1,135 @@
-﻿@model IEnumerable<ProductImageDto>
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AgLeather Admin Template</title>
 
-@inject IHttpContextAccessor _contextAccessor
-@inject IConfiguration _configuration
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/admin/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="~/index3.html" class="brand-link">
+                <img src="~/admin/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">AgLeather</span>
+            </a>
 
-<div class="container">
-    <div class="row">
-        @Html.ActionLink("Resim Ekle", "Create","ProductImage", new { Area="Admin", productId= _contextAccessor.HttpContext.Request.Query["productId"]},
-        new{@class="offset-8 col-4 btn btn-success mb-5"})
-    </div>
-</div>
-
-@{
-    if (Model != null && Model.Any())
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Path)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Order)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsThumbnail)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="tr-@item.Id">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductId)
-                        </td>
-                        <td>
-                            <img src="@_configuration["Api:Url"]@item.Path" width="60" height="60">
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Order)
-                        </td>
-                        <td>
-                            @{
-                                if (item.IsThumbnail.HasValue && item.IsThumbnail.Value)
-                                {
-                                    <span>Manşet resmi</span>
-                                }
-                            }
-                        </td>
-                        <td>
-                            <a href="#" data-id="@item.Id" class="btn btn-danger btnDelete">Sil</a>
-                        </td>
-                    </tr>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="~/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">AGAH GULER</a>
+                    </div>
+                </div>
+                s
+                <!-- Sidebar Menu -->
+                @{
+                    await Html.RenderPartialAsync("_SideBar");
                 }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <div class="alert alert-warning" role="alert">
-            Şu an için bu ürüne ait görüntülenecek resim bulunamadı.
-        </div>
-    }
-}
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1>@ViewBag.Header</h1>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
 
-@section Scripts{
-    <script>
+            <!-- Main content -->
+            <section class="content">
 
-        $().ready(function () {
-            $(".btnDelete").click(function () {
-                var id = $(this).attr('data-id')
-                console.log(id)
-                $.ajax({
-                    type: "DELETE",
-                    url: "/admin/productImage/delete/" + id,
-                    dataType: "json",
-                    contentType: "application/json;charset=utf-8",
-                    success: function (response) {
-                        console.log(response)
-                        if (response.success) {
-                            var tdClassName = "tr-" + id
-                            $("." + tdClassName).fadeOut('slow', function () {
-                                $(this).remove()
-                            })
-                        } else {
-                            alert(response.errors[0])
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@ViewBag.Title</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @{
+                            if (TempData["success"] != null)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    @TempData["success"]
+                                </div>
+                            }
+                            else if (TempData["error"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["error"]
+                                </div>
+                            }
                         }
-                    },
-                    error: function (response) {
-                        alert('İstek esnasından sonucu taraflı bir hata oluştu.')
-                    }
-                })
-            })
-        })
+                        @RenderBody()
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer">
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
 
-    </script>
-}
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
 
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 1.0.1
+            </div>
+            <strong>Copyright &copy; 2023 <a href="https://adminlte.io">AgLeather.io</a>.</strong> All rights reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/admin/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/admin/dist/js/demo.js"></script>
+
+    @{
+        await RenderSectionAsync("Scripts", false);
+    }
+
+</body>
+</html>

@@ -4,6 +4,7 @@ using AgLeather.Shop.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     [DbContext(typeof(AgLeatherContext))]
-    partial class AgLeatherContextModelSnapshot : ModelSnapshot
+    [Migration("20230826234122_IS_DELETED_columNameChanged")]
+    partial class IS_DELETED_columNameChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +53,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<string>("LastUserIp")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("LAST_LOGIN_IP")
                         .HasColumnOrder(6);
@@ -551,8 +555,8 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnName("UNIT_IN_STOCK")
                         .HasColumnOrder(5);
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("int")
                         .HasColumnName("UNIT_PRICE")
                         .HasColumnOrder(6);
 

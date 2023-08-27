@@ -85,7 +85,8 @@ namespace AgLeather.Shop.Application.Services.Implementation
             //Gelen parolayı şifrele. Çünkü db de şifreli parola var.
             var hashedPassword = CipherUtil.EncryptString(_configuration["AppSettings:SecretKey"], loginVM.Password);
             //Bu kullanıcı adı ve parola ile eşleşen bir kullanıcı var mı
-            var existsAccount = await _uWork.GetRepository<Account>().GetSingleByFilterAsync(x => x.Username == loginVM.Username && x.Password == hashedPassword, "Customer");
+            var existsAccount = await _uWork.GetRepository<Account>()
+                .GetSingleByFilterAsync(x => x.Username == loginVM.Username && x.Password == hashedPassword, "Customer");
             //Kullanıcı yoksa hata fırlat.
             if (existsAccount is null)
             {

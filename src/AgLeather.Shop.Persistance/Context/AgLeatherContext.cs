@@ -100,8 +100,6 @@ namespace AgLeather.Shop.Persistance.Context
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
 
-
-
         }
     }
 }

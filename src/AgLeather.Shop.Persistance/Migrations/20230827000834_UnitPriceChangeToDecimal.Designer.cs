@@ -4,6 +4,7 @@ using AgLeather.Shop.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     [DbContext(typeof(AgLeatherContext))]
-    partial class AgLeatherContextModelSnapshot : ModelSnapshot
+    [Migration("20230827000834_UnitPriceChangeToDecimal")]
+    partial class UnitPriceChangeToDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

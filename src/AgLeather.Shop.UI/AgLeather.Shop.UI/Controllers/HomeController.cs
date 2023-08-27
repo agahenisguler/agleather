@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace AgLeather.Shop.UI.Controllers
 {
-    [Authorize(Policy = "User")]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

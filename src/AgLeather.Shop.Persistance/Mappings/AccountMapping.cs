@@ -31,6 +31,7 @@ namespace AgLeather.Shop.Persistance.Mappings
             builder.Property(x => x.LastUserIp)
                 .HasColumnType("nvarchar(50)")
                 .HasColumnName("LAST_LOGIN_IP")
+                .IsRequired(false)
                 .HasColumnOrder(6);
 
             builder.Property(x => x.Role)

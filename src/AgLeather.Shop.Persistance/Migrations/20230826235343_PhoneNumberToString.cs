@@ -5,7 +5,7 @@
 namespace AgLeather.Shop.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class test3 : Migration
+    public partial class PhoneNumberToString : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

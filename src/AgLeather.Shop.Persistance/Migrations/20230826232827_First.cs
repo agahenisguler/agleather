@@ -6,30 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class First : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ACCOUNTS",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CUSTOMER_ID = table.Column<int>(type: "int", nullable: false),
-                    USER_NAME = table.Column<string>(type: "nvarchar(10)", nullable: false),
-                    PASSWORD = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    LAST_LOGIN_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LAST_LOGIN_IP = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    ROLE_ID = table.Column<int>(type: "int", nullable: false),
-                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ACCOUNTS", x => x.ID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "CATEGORIES",
                 columns: table => new
@@ -117,13 +98,12 @@ namespace AgLeather.Shop.Persistance.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ACCOUNT_ID = table.Column<int>(type: "int", nullable: false),
                     CITY_ID = table.Column<int>(type: "int", nullable: false),
+                    IDENTITY_NUMBER = table.Column<string>(type: "nchar(11)", nullable: false),
                     NAME = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     SURNAME = table.Column<string>(type: "nvarchar(30)", nullable: false),
                     EMAIL = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    PHONE_NUMBER = table.Column<int>(type: "int", nullable: false),
-                    AGE = table.Column<int>(type: "int", nullable: false),
+                    PHONE_NUMBER = table.Column<string>(type: "nchar(13)", nullable: false),
                     BIRTHDATE = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GENDER = table.Column<int>(type: "int", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -135,11 +115,6 @@ namespace AgLeather.Shop.Persistance.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CUSTOMERS", x => x.ID);
-                    table.ForeignKey(
-                        name: "CUSTOMER_ACCOUNT_ACCOUNT_ID",
-                        column: x => x.ACCOUNT_ID,
-                        principalTable: "ACCOUNTS",
-                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "CUSTOMER_CIT_CITY_ID",
                         column: x => x.CITY_ID,
@@ -176,6 +151,31 @@ namespace AgLeather.Shop.Persistance.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ACCOUNTS",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CUSTOMER_ID = table.Column<int>(type: "int", nullable: false),
+                    USER_NAME = table.Column<string>(type: "nvarchar(10)", nullable: false),
+                    PASSWORD = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    LAST_LOGIN_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LAST_LOGIN_IP = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    ROLE_ID = table.Column<int>(type: "int", nullable: false),
+                    IS_DALETED = table.Column<bool>(type: "bit", nullable: true, defaultValueSql: "0")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ACCOUNTS", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ACCOUNTS_CUSTOMERS_CUSTOMER_ID",
+                        column: x => x.CUSTOMER_ID,
+                        principalTable: "CUSTOMERS",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "COMMENTS",
                 columns: table => new
                 {
@@ -206,7 +206,8 @@ namespace AgLeather.Shop.Persistance.Migrations
                         name: "COMMENT_PRODUCT_PRODUCT_ID",
                         column: x => x.PRODUCT_ID,
                         principalTable: "PRODUCTS",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,8 +220,6 @@ namespace AgLeather.Shop.Persistance.Migrations
                     ADDRESS_ID = table.Column<int>(type: "int", nullable: false),
                     ORDER_DATE = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
                     ORDER_STATUS = table.Column<int>(type: "int", nullable: false),
-                    DELIVERY_TYPE = table.Column<int>(type: "int", nullable: false),
-                    GIFT_PACKT = table.Column<bool>(type: "bit", nullable: false),
                     CREATE_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CREATE_BY = table.Column<string>(type: "nvarchar(10)", nullable: true),
                     MODIFIED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -266,7 +265,8 @@ namespace AgLeather.Shop.Persistance.Migrations
                         name: "ORDER_DETAIL_ORDER_ORDER_ID",
                         column: x => x.ORDER_ID,
                         principalTable: "ORDERS",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "ORDER_DETAIL_PRODUCT_PRODUCT_ID",
                         column: x => x.PRODUCT_ID,
@@ -274,6 +274,12 @@ namespace AgLeather.Shop.Persistance.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ACCOUNTS_CUSTOMER_ID",
+                table: "ACCOUNTS",
+                column: "CUSTOMER_ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ADDRESSES_CITY_ID",
@@ -289,12 +295,6 @@ namespace AgLeather.Shop.Persistance.Migrations
                 name: "IX_COMMENTS_PRODUCT_ID",
                 table: "COMMENTS",
                 column: "PRODUCT_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CUSTOMERS_ACCOUNT_ID",
-                table: "CUSTOMERS",
-                column: "ACCOUNT_ID",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CUSTOMERS_CITY_ID",
@@ -336,6 +336,9 @@ namespace AgLeather.Shop.Persistance.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ACCOUNTS");
+
+            migrationBuilder.DropTable(
                 name: "COMMENTS");
 
             migrationBuilder.DropTable(
@@ -358,9 +361,6 @@ namespace AgLeather.Shop.Persistance.Migrations
 
             migrationBuilder.DropTable(
                 name: "CATEGORIES");
-
-            migrationBuilder.DropTable(
-                name: "ACCOUNTS");
 
             migrationBuilder.DropTable(
                 name: "CITIES");

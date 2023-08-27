@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgLeather.Shop.Persistance.Migrations
 {
     [DbContext(typeof(AgLeatherContext))]
-    [Migration("20230824170457_test3")]
-    partial class test3
+    [Migration("20230826232827_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -76,6 +76,9 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnOrder(3);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("ACCOUNTS", (string)null);
                 });
@@ -280,16 +283,6 @@ namespace AgLeather.Shop.Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int")
-                        .HasColumnName("ACCOUNT_ID")
-                        .HasColumnOrder(2);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int")
-                        .HasColumnName("AGE")
-                        .HasColumnOrder(8);
-
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2")
                         .HasColumnName("BIRTHDATE")
@@ -314,12 +307,18 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasColumnName("EMAIL")
-                        .HasColumnOrder(6);
+                        .HasColumnOrder(7);
 
                     b.Property<int>("Gender")
                         .HasColumnType("int")
                         .HasColumnName("GENDER")
                         .HasColumnOrder(10);
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nchar(11)")
+                        .HasColumnName("IDENTITY_NUMBER")
+                        .HasColumnOrder(4);
 
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -342,23 +341,21 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("NAME")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(5);
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int")
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nchar(13)")
                         .HasColumnName("PHONE_NUMBER")
-                        .HasColumnOrder(7);
+                        .HasColumnOrder(8);
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("SURNAME")
-                        .HasColumnOrder(5);
+                        .HasColumnOrder(6);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId")
-                        .IsUnique();
 
                     b.HasIndex("CityId");
 
@@ -394,16 +391,6 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CUSTOMER_ID")
                         .HasColumnOrder(2);
-
-                    b.Property<int>("DeliveryType")
-                        .HasColumnType("int")
-                        .HasColumnName("DELIVERY_TYPE")
-                        .HasColumnOrder(6);
-
-                    b.Property<bool>("GiftPackt")
-                        .HasColumnType("bit")
-                        .HasColumnName("GIFT_PACKT")
-                        .HasColumnOrder(7);
 
                     b.Property<bool?>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -568,7 +555,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                         .HasColumnName("UNIT_IN_STOCK")
                         .HasColumnOrder(5);
 
-                    b.Property<int>("UnıtPrice")
+                    b.Property<int>("UnitPrice")
                         .HasColumnType("int")
                         .HasColumnName("UNIT_PRICE")
                         .HasColumnOrder(6);
@@ -645,6 +632,17 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.ToTable("PRODUCT_IMAGES", (string)null);
                 });
 
+            modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Account", b =>
+                {
+                    b.HasOne("AgLeather.Shop.Domain.Entities.Customer", "Customer")
+                        .WithOne("Account")
+                        .HasForeignKey("AgLeather.Shop.Domain.Entities.Account", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Address", b =>
                 {
                     b.HasOne("AgLeather.Shop.Domain.Entities.City", "City")
@@ -669,7 +667,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.HasOne("AgLeather.Shop.Domain.Entities.Product", "Product")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("COMMENT_PRODUCT_PRODUCT_ID");
 
@@ -680,21 +678,12 @@ namespace AgLeather.Shop.Persistance.Migrations
 
             modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Customer", b =>
                 {
-                    b.HasOne("AgLeather.Shop.Domain.Entities.Account", "Account")
-                        .WithOne("Customer")
-                        .HasForeignKey("AgLeather.Shop.Domain.Entities.Customer", "AccountId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
-                        .HasConstraintName("CUSTOMER_ACCOUNT_ACCOUNT_ID");
-
                     b.HasOne("AgLeather.Shop.Domain.Entities.City", "City")
                         .WithMany("Customers")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("CUSTOMER_CIT_CITY_ID");
-
-                    b.Navigation("Account");
 
                     b.Navigation("City");
                 });
@@ -725,7 +714,7 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.HasOne("AgLeather.Shop.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("ORDER_DETAIL_ORDER_ORDER_ID");
 
@@ -765,12 +754,6 @@ namespace AgLeather.Shop.Persistance.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Account", b =>
-                {
-                    b.Navigation("Customer")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Address", b =>
                 {
                     b.Navigation("Orders");
@@ -790,6 +773,9 @@ namespace AgLeather.Shop.Persistance.Migrations
 
             modelBuilder.Entity("AgLeather.Shop.Domain.Entities.Customer", b =>
                 {
+                    b.Navigation("Account")
+                        .IsRequired();
+
                     b.Navigation("Comments");
 
                     b.Navigation("Orders");

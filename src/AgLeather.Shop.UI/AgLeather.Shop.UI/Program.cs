@@ -40,7 +40,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
             {
 
                 //Eðer admin tarafýnda login olmadan yetki gerektiren bir sayfaya gitmeye çalýþýrsa admin login gelsin
-                if (context.Request.Path.Value.Contains("admin"))
+                if (context.Request.Path.Value.Contains("Admin"))
                 {
                     context.Response.Redirect("/admin/login/signin");
                 }

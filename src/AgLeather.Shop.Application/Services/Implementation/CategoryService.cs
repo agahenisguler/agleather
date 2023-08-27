@@ -100,7 +100,7 @@ namespace AgLeather.Shop.Application.Services.Implementation
             var categoryEntity = _mapper.Map<CreateCategoryVM, Category>(createCategoryVM);
 
             _db.GetRepository<Category>().Add(categoryEntity);
-            _db.CommitAsync();
+            await _db.CommitAsync();
 
             //Üretilen entity kategori koleksiyonuna ekleniyor.
             //await _context.Categories.AddAsync(categoryEntity);
