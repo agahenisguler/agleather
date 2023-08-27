@@ -1,12 +1,6 @@
 ﻿using ArxOne.MrAdvice.Advice;
-using Microsoft.Identity.Client;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgLeather.Shop.Application.Behaviors
 {
